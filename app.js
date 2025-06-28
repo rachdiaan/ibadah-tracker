@@ -342,7 +342,7 @@ async function getTadabbur(dzikir) {
     
     let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
     const payload = { contents: chatHistory };
-    const apiKey = ""; 
+    const apiKey = "AIzaSyBiscBG-1BjePTdZ6NskfWvg7OcpHPBsqs"; 
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     try {
@@ -378,7 +378,7 @@ async function getDailyWisdom() {
     const prompt = `Berikan satu kutipan Islami singkat, atau untaian kata hikmah yang menenangkan hati dan memberikan inspirasi. Saat ini mendekati waktu ${nextPrayer?.name || 'sholat'}. Buatlah jawaban dalam 1-2 kalimat saja, dalam Bahasa Indonesia.`;
     
     try {
-        const apiKey = "";
+        const apiKey = "AIzaSyBiscBG-1BjePTdZ6NskfWvg7OcpHPBsqs";
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
         
         const payload = {
