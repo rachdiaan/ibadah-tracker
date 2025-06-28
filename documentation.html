@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dokumentasi - Al-Ma'tsurat & Jadwal Shalat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-blue: #16325B;
+            --medium-blue: #227B94;
+            --light-blue: #78B7D0;
+            --highlight-yellow: #FFDC7F;
+            --font-light: #FFFFFF;
+            --font-dark: #000000;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-blue);
+            color: var(--font-light);
+            overflow-x: hidden;
+        }
+        
+        .liquid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: linear-gradient(60deg, #16325B, #1a4a6e, #227B94, #16325B);
+            background-size: 400% 400%;
+            animation: gradient-animation 25s ease infinite;
+        }
+        
+        @keyframes gradient-animation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 280px;
+            background: rgba(10, 20, 40, 0.5);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease-out;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+                z-index: 40;
+                height: 100vh;
+            }
+            .sidebar.open {
+                transform: translateX(0);
+            }
+        }
+
+        .sidebar a {
+            color: #D1D5DB; /* gray-300 */
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar a:hover {
+            color: var(--font-light);
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .sidebar a.active {
+            color: var(--highlight-yellow);
+            border-left-color: var(--highlight-yellow);
+            background-color: rgba(255, 220, 127, 0.1);
+            font-weight: 600;
+        }
+        
+        .sidebar-item-level-1 { padding-left: 1.25rem; font-weight: 500;}
+        .sidebar-item-level-2 { padding-left: 2.5rem; font-size: 0.9rem; color: #9CA3AF; }
+
+        .main-content {
+            height: 100vh;
+            overflow-y: auto;
+            scroll-behavior: smooth;
+        }
+        
+        .main-content h1, .main-content h2, .main-content h3 {
+            color: var(--font-light);
+            font-weight: 800;
+            padding-bottom: 0.75rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .main-content h1 { font-size: 2.5rem; letter-spacing: -0.025em; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .main-content h2 { font-size: 2rem; letter-spacing: -0.025em; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+        .main-content h3 { font-size: 1.5rem; font-weight: 700; }
+        
+        .main-content p, .main-content li {
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            color: #D1D5DB; /* gray-300 */
+        }
+        
+        .main-content a {
+            color: var(--highlight-yellow);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+            border-bottom: 1px solid rgba(255, 220, 127, 0.5);
+        }
+        .main-content a:hover {
+            color: #FFF;
+            border-bottom-color: #FFF;
+        }
+        
+        .main-content ul { list-style-type: disc; padding-left: 1.5rem; }
+        .main-content ol { list-style-type: decimal; padding-left: 1.5rem; }
+
+        .main-content code {
+            background-color: rgba(0, 0, 0, 0.3);
+            color: var(--light-blue);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .main-content strong {
+            color: var(--font-light);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="flex">
+    <div class="liquid-bg"></div>
+    
+    <button id="menu-toggle" class="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-md shadow-md text-white bg-black/20 backdrop-blur-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+    </button>
+    
+    <aside id="sidebar" class="sidebar flex-shrink-0 h-full overflow-y-auto">
+        <div class="p-6">
+            <h2 class="text-xl font-bold mb-2 text-white">Dokumentasi</h2>
+            <p class="text-sm text-gray-400 mb-6">Al-Ma'tsurat & Jadwal Shalat</p>
+            <a href="index.html" class="inline-flex items-center text-sm font-semibold mb-8 text-white hover:text-yellow-300 transition-colors bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg w-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+                </svg>
+                Kembali ke Aplikasi
+            </a>
+            <nav>
+                <ul class="space-y-1">
+                    <li><a href="#1-pendahuluan" class="sidebar-item-level-1 block py-2 px-5 rounded-md">1. Pendahuluan</a></li>
+                    <li><a href="#11-tujuan-aplikasi" class="sidebar-item-level-2 block py-2 px-5 rounded-md">1.1 Tujuan Aplikasi</a></li>
+                    <li><a href="#2-fitur-utama" class="sidebar-item-level-1 block py-2 px-5 rounded-md">2. Fitur Utama</a></li>
+                    <li><a href="#3-struktur-proyek" class="sidebar-item-level-1 block py-2 px-5 rounded-md">3. Struktur Proyek</a></li>
+                    <li><a href="#31-rincian-file" class="sidebar-item-level-2 block py-2 px-5 rounded-md">3.1 Rincian File</a></li>
+                    <li><a href="#4-penjelasan-kode" class="sidebar-item-level-1 block py-2 px-5 rounded-md">4. Penjelasan Kode</a></li>
+                    <li><a href="#41-indexhtml" class="sidebar-item-level-2 block py-2 px-5 rounded-md">4.1 index.html</a></li>
+                    <li><a href="#42-stylecss" class="sidebar-item-level-2 block py-2 px-5 rounded-md">4.2 style.css</a></li>
+                    <li><a href="#43-datajs" class="sidebar-item-level-2 block py-2 px-5 rounded-md">4.3 data.js</a></li>
+                    <li><a href="#44-appjs" class="sidebar-item-level-2 block py-2 px-5 rounded-md">4.4 app.js</a></li>
+                    <li><a href="#5-instalasi--penggunaan" class="sidebar-item-level-1 block py-2 px-5 rounded-md">5. Instalasi & Penggunaan</a></li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+
+    <main class="main-content flex-1 p-6 md:p-12">
+        <article>
+            <section id="1-pendahuluan">
+                <h1>1. Pendahuluan</h1>
+                <section id="11-tujuan-aplikasi">
+                    <h3>1.1 Tujuan Aplikasi</h3>
+                    <p>
+                        Sebagai sebuah karya digital yang inovatif dari <strong>Rachdian Habi Yahya</strong>, aplikasi ini hadir dalam bentuk <strong>Progressive Web App (PWA)</strong> canggih yang dirancang untuk memperkaya pengalaman spiritual harian Anda. Aplikasi ini secara dinamis mengintegrasikan amalan dzikir Al-Ma'tsurat Sugro dengan informasi jadwal shalat yang akurat untuk wilayah Bandung, disajikan melalui antarmuka <em>liquid glass</em> yang modern dan sangat responsif. Tujuannya adalah untuk memberikan pengalaman yang tidak hanya menenangkan, tetapi juga fungsional dan memberdayakan.
+                    </p>
+                    <p>
+                        Aplikasi ini sepenuhnya mandiri (client-side) dan tidak memerlukan server backend untuk fungsi utamanya. Fitur tambahan seperti refleksi (Tadabbur) ditenagai oleh Google AI (Gemini API).
+                    </p>
+                </section>
+            </section>
+            
+            <section id="2-fitur-utama">
+                <h2>2. Fitur Utama</h2>
+                <ul>
+                    <li><strong>Laman Utama Dinamis:</strong> Menampilkan widget jadwal shalat interaktif dengan jam digital dan tanggal yang berjalan secara <em>real-time</em>.</li>
+                    <li><strong>Jadwal Shalat & Countdown:</strong> Menampilkan jadwal shalat untuk hari ini (Subuh, Dzuhur, Ashar, Maghrib, Isya) dan hitung mundur (<em>countdown</em>) menuju waktu shalat terdekat berikutnya.</li>
+                    <li><strong>Notifikasi Waktu Shalat:</strong> Saat waktu shalat tiba, sebuah notifikasi layar penuh yang indah akan muncul dengan animasi untuk mengingatkan pengguna.</li>
+                    <li><strong>Dzikir Pagi & Petang:</strong> Menyediakan dua halaman terpisah untuk dzikir Al-Ma'tsurat pagi dan petang.</li>
+                    <li><strong>Penghitung Tap (Tap Counter):</strong> Setiap kartu dzikir memiliki penghitung interaktif untuk membantu pengguna melacak jumlah bacaan. Progress bar visual juga akan terisi sesuai hitungan.</li>
+                    <li><strong>Tadabbur dengan AI:</strong> Fitur "Tadabbur" pada setiap kartu dzikir yang ditenagai oleh Gemini API untuk memberikan refleksi singkat mengenai makna dan hikmah dari doa atau ayat tersebut.</li>
+                    <li><strong>Desain Modern & Responsif:</strong> Menggunakan estetika <em>liquid glass</em> ala Apple/iOS, palet warna yang menenangkan, dan animasi yang halus. Tata letak sepenuhnya responsif untuk semua ukuran perangkat.</li>
+                    <li><strong>Panel Kontrol Pratinjau:</strong> Sebuah panel kontrol di pojok kanan bawah (hanya untuk tujuan pengembangan) untuk memudahkan navigasi ke semua halaman dan fitur utama.</li>
+                </ul>
+            </section>
+            
+            <section id="3-struktur-proyek">
+                <h2>3. Struktur Proyek</h2>
+                <p>Proyek ini dipisahkan menjadi empat file utama untuk keterbacaan, pengelolaan, dan performa yang lebih baik.</p>
+                <section id="31-rincian-file">
+                    <h3>3.1 Rincian File</h3>
+                    <ul>
+                        <li><code>index.html</code>: File kerangka utama yang berisi struktur dasar HTML dan menautkan file CSS serta JavaScript.</li>
+                        <li><code>style.css</code>: Berisi semua aturan styling, termasuk variabel warna, efek <em>liquid glass</em>, animasi, dan tata letak responsif.</li>
+                        <li><code>data.js</code>: Menyimpan semua data statis aplikasi, termasuk data jadwal shalat tahunan untuk Bandung dan data lengkap untuk dzikir pagi dan petang.</li>
+                        <li><code>app.js</code>: Merupakan inti dari aplikasi yang berisi semua logika JavaScript, seperti rendering halaman, manajemen <em>event</em>, fungsi <em>countdown</em>, dan panggilan ke Gemini API.</li>
+                    </ul>
+                </section>
+            </section>
+            
+            <section id="4-penjelasan-kode">
+                <h2>4. Penjelasan Kode</h2>
+                <section id="41-indexhtml">
+                    <h3>4.1 `index.html`</h3>
+                    <p>File ini berfungsi sebagai "tulang punggung" aplikasi.</p>
+                    <ul>
+                        <li><strong>&lt;head&gt;</strong>: Bagian ini memuat meta tag standar, tautan ke CDN TailwindCSS, Google Fonts (Amiri & Inter), dan stylesheet lokal <code>style.css</code>.</li>
+                        <li><strong>&lt;body&gt;</strong>: Berisi elemen-elemen HTML dasar yang akan dimanipulasi oleh <code>app.js</code>, seperti <code>header</code>, <code>main</code>, <code>footer</code>, serta struktur untuk modal dan notifikasi. Tautan ke file JavaScript <code>data.js</code> dan <code>app.js</code> ditempatkan di akhir body.</li>
+                    </ul>
+                </section>
+                <section id="42-stylecss">
+                    <h3>4.2 `style.css`</h3>
+                    <p>File ini bertanggung jawab atas seluruh tampilan dan nuansa aplikasi.</p>
+                    <ul>
+                        <li><strong>:root</strong>: Mendefinisikan variabel CSS untuk palet warna agar mudah diubah dan konsisten.</li>
+                        <li><strong>.liquid-bg</strong>: Menciptakan animasi gradien yang bergerak sebagai latar belakang.</li>
+                        <li><strong>.glass-card</strong>: Kelas inti untuk efek *liquid glass*, menggunakan <code>background</code> transparan dengan <code>backdrop-filter: blur()</code>.</li>
+                        <li><strong>.next-prayer-highlight & @keyframes pulse-highlight</strong>: Memberikan efek sorotan dan animasi denyut pada kartu waktu shalat berikutnya.</li>
+                        <li><strong>.prayer-alert-overlay & @keyframes</strong>: Mengatur tampilan notifikasi waktu shalat.</li>
+                    </ul>
+                </section>
+                <section id="43-datajs">
+                    <h3>4.3 `data.js`</h3>
+                    <p>File ini sangat sederhana, hanya berisi dua variabel JavaScript:</p>
+                    <ul>
+                        <li><code>const prayerData</code>: Objek besar berisi data jadwal shalat untuk Bandung selama satu tahun.</li>
+                        <li><code>const dzikirDataPagi</code> & <code>dzikirDataPetang</code>: Array objek berisi data lengkap untuk dzikir pagi dan petang.</li>
+                    </ul>
+                </section>
+                <section id="44-appjs">
+                    <h3>4.4 `app.js`</h3>
+                    <p>Ini adalah file paling kompleks yang menggerakkan seluruh aplikasi.</p>
+                    <h4>Logika Utama</h4>
+                    <ul>
+                        <li><strong>Selektor DOM</strong>: Variabel untuk menyimpan referensi ke elemen HTML utama.</li>
+                        <li><strong>Fungsi Rendering Halaman</strong>: `renderLandingPage()`, `renderDzikirPage(type)`, `renderAboutPage()` untuk membangun tampilan secara dinamis.</li>
+                        <li><strong>Manajemen Event</strong>: Mengatur semua interaksi pengguna, seperti klik tombol, tap pada kartu, dll.</li>
+                    </ul>
+                    <h4>Fungsi Kunci</h4>
+                    <ul>
+                        <li><strong>`initializePrayerWidget()`</strong>: Memulai jam digital dan countdown.</li>
+                        <li><strong>`getNextPrayer()`</strong>: Logika cerdas untuk menentukan waktu shalat berikutnya.</li>
+                        <li><strong>`showPrayerTimeAlert(...)`</strong>: Menampilkan notifikasi waktu shalat dengan pesan dinamis.</li>
+                        <li><strong>`getTadabbur(...)`</strong>: Fungsi <code>async</code> yang memanggil Gemini API untuk mendapatkan refleksi doa.</li>
+                    </ul>
+                </section>
+            </section>
+
+            <section id="5-instalasi--penggunaan">
+                <h2>5. Instalasi & Penggunaan</h2>
+                <ol class="list-decimal list-inside space-y-2">
+                    <li><strong>Simpan Semua File</strong>: Pastikan kelima file (`index.html`, `style.css`, `data.js`, `app.js`, dan file dokumentasi ini sendiri dengan nama `documentation.html`) telah disimpan.</li>
+                    <li><strong>Letakkan di Folder yang Sama</strong>: Tempatkan semua file tersebut di dalam satu direktori/folder.</li>
+                    <li><strong>Buka `index.html`</strong>: Klik dua kali pada file `index.html` untuk membukanya di browser web modern seperti Chrome, Firefox, atau Safari.</li>
+                </ol>
+                <p class="mt-4">Aplikasi akan berjalan sepenuhnya di browser Anda tanpa perlu koneksi internet (setelah semua file dimuat pertama kali), kecuali untuk fitur "Tadabbur" yang memerlukan koneksi untuk menghubungi Gemini API.</p>
+            </section>
+        </article>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.getElementById('menu-toggle');
+            const mainContent = document.querySelector('.main-content');
+            const overlay = document.createElement('div');
+            overlay.className = 'fixed inset-0 bg-black/50 z-30 hidden lg:hidden';
+            document.body.appendChild(overlay);
+
+            function closeSidebar() {
+                if (sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                    overlay.classList.add('hidden');
+                }
+            }
+
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                sidebar.classList.toggle('open');
+                overlay.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+                    closeSidebar();
+                }
+            });
+            overlay.addEventListener('click', closeSidebar);
+
+            const links = document.querySelectorAll('.sidebar a');
+            const sections = Array.from(document.querySelectorAll('main section[id]'));
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const id = entry.target.getAttribute('id');
+                    const correspondingLink = document.querySelector(`.sidebar a[href="#${id}"], .sidebar a[href="#${entry.target.parentElement.id}"]`);
+                    if (entry.isIntersecting) {
+                        links.forEach(link => link.classList.remove('active'));
+                        if(correspondingLink) {
+                            correspondingLink.classList.add('active');
+                        }
+                    }
+                });
+            }, {
+                root: mainContent,
+                rootMargin: "-40% 0px -40% 0px", // Trigger when section is in the middle of the viewport
+                threshold: 0
+            });
+            
+            sections.forEach(section => observer.observe(section));
+
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetElement = document.querySelector(href);
+                        if (targetElement) {
+                            mainContent.scrollTo({
+                                top: targetElement.offsetTop - 20,
+                                behavior: 'smooth'
+                            });
+                            closeSidebar();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

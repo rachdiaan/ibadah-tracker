@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Al-Ma'tsurat Sugro</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="liquid-bg"></div>
+
+    <div class="container mx-auto p-4 md:p-6 max-w-4xl min-h-screen flex flex-col">
+        <header id="main-header" class="text-center mb-6 relative">
+            <button id="back-button" class="absolute left-0 top-1/2 -translate-y-1/2 glass-card p-2 hover:bg-white/10 transition hidden z-20">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            <h1 id="header-title" class="text-3xl md:text-4xl font-bold text-white"></h1>
+            <p id="header-subtitle" class="text-xl text-slate-300 mt-1"></p>
+        </header>
+
+        <main id="page-content" class="flex-grow"></main>
+
+        <footer class="text-center mt-12 py-6 text-slate-400">
+            <p>&copy; 2025. Created with ❤️ by Rachdian</p>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div id="tadabbur-modal" class="modal-overlay">
+        <div class="modal-content glass-card">
+            <h3 id="modal-title" class="text-2xl font-bold text-white mb-4 text-center">Tadabbur</h3>
+            <div id="modal-body" class="text-slate-200 text-center"></div>
+            <button id="modal-close" class="mt-6 w-full py-2.5 px-4 bg-white/10 border border-white/20 text-white rounded-xl hover:bg-white/20 transition">Tutup</button>
+        </div>
+    </div>
+    
+    <div id="prayer-alert" class="prayer-alert-overlay">
+        <h2 id="prayer-alert-text" class="text-4xl md:text-6xl font-bold prayer-alert-text"></h2>
+        <p id="prayer-alert-subtext" class="text-2xl mt-2 text-white/80 prayer-alert-text" style="animation-delay: 0.2s;"></p>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
